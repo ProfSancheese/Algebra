@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inecuaciones sin miedo</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8f3;--card:#fff;--ink:#3b3550;--soft:#7a7392;--mint:#d4f1e4;--lilac:#e6dcfa;--peach:#ffe3d3;--sky:#d7ebfb;--butter:#fff3c4;--acc:#7c5cd6;--ok:#2f9e72;--bad:#d1566b;--line:#e8e1f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a2b;--card:#282439;--ink:#efeaff;--soft:#b3abcc;--mint:#27493d;--lilac:#3a3260;--peach:#503a33;--sky:#2b4258;--butter:#4d4527;--acc:#b9a3ff;--ok:#6ad6a4;--bad:#ff8ea1;--line:#3d3756}}
+:root[data-theme="dark"]{--bg:#1d1a2b;--card:#282439;--ink:#efeaff;--soft:#b3abcc;--mint:#27493d;--lilac:#3a3260;--peach:#503a33;--sky:#2b4258;--butter:#4d4527;--acc:#b9a3ff;--ok:#6ad6a4;--bad:#ff8ea1;--line:#3d3756}
+html{color-scheme:light dark;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:2rem;font-weight:800;margin:8px 0 4px}
+.sub{color:var(--soft);margin:0 0 18px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+nav button{flex:1 1 140px;border:2px solid transparent;border-radius:16px;padding:10px 12px;font:inherit;font-weight:800;color:var(--ink);cursor:pointer}
+nav button:nth-child(1){background:var(--mint)}nav button:nth-child(2){background:var(--sky)}nav button:nth-child(3){background:var(--peach)}nav button:nth-child(4){background:var(--lilac)}
+nav button[aria-selected="true"]{border-color:var(--acc);transform:translateY(-2px)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:14px}
+details{border-radius:18px;margin-bottom:12px;padding:4px 16px}
+details:nth-of-type(1){background:var(--mint)}details:nth-of-type(2){background:var(--sky)}details:nth-of-type(3){background:var(--peach)}details:nth-of-type(4){background:var(--lilac)}
+summary{font-weight:800;font-size:1.1rem;cursor:pointer;padding:10px 0}
+details p,details li{margin:6px 0}
+.tip{background:var(--card);border-radius:12px;padding:8px 12px;margin:10px 0}
+.big{font-size:1.5rem;font-weight:800;text-align:center;margin:10px 0}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.row label{display:flex;gap:6px;align-items:center;font-weight:600}
+input[type=range]{accent-color:var(--acc);width:180px}
+.btn{border:0;background:var(--acc);color:var(--bg);font:inherit;font-weight:800;border-radius:14px;padding:10px 16px;cursor:pointer}
+.btn.alt{background:var(--butter);color:var(--ink)}
+.btn:disabled{opacity:.4;cursor:default}
+svg{width:100%;height:auto;display:block}
+.out{background:var(--butter);border-radius:14px;padding:10px 14px;font-weight:800;text-align:center;font-size:1.2rem}
+.eq{display:flex;gap:18px;justify-content:center;align-items:center;font-size:1.8rem;font-weight:800;margin:14px 0}
+#seesaw{font-size:2.6rem;transition:transform .4s}
+.msg{min-height:3.2em;margin:10px 0}
+.line{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:1.1rem;cursor:pointer}
+.line.right{border-color:var(--ok);background:var(--mint)}.line.wrong{border-color:var(--bad)}
+.pill{display:inline-block;background:var(--butter);padding:2px 12px;border-radius:99px;font-weight:800}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.pt{font-weight:600;margin:12px 0 4px}
+.demo{background:var(--card);border-radius:14px;padding:10px 12px;margin:4px 0 14px}
+.demo .ex{font-size:1.3rem}
+.demo .note{text-align:center;color:var(--soft);font-size:.95rem;min-height:2.6em;margin:4px 0}
+.demo .row{justify-content:center}
+.btn.sm{padding:6px 12px;font-size:.95rem}
+.fr{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;line-height:1.25;margin:0 3px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Inecuaciones sin miedo 🌈</h1>
+<p class="sub">Aprende, juega con la recta, practica con la balanza y atrapa errores como detective.</p>
+<nav role="tablist">
+<button role="tab" aria-selected="true" data-t="t1">📖 Teoría</button>
+<button role="tab" aria-selected="false" data-t="t2">📏 Recta</button>
+<button role="tab" aria-selected="false" data-t="t3">⚖️ Balanza</button>
+<button role="tab" aria-selected="false" data-t="t4">🔍 Detective</button>
+</nav>
+
+<section id="t1" class="on">
+<p class="sub">Toca los botones de cada ejemplo para ver la regla en acción.</p>
+<details open><summary>1. Reglas del juego</summary>
+<p class="pt">➕ Sumar o restar lo mismo a los dos lados: el signo se queda.</p><div class="demo" id="d1a"></div>
+<p class="pt">✖️ Multiplicar por un positivo: el signo se queda.</p><div class="demo" id="d1b"></div>
+<p class="pt">🔄 Multiplicar por un negativo: ¡el signo se voltea!</p><div class="demo" id="d1c"></div>
+</details>
+<details><summary>2. Intervalos</summary>
+<p class="pt">⚪ no entra, ⚫ sí entra. El infinito nunca se toca.</p><div class="demo" id="d2a"></div>
+<p class="pt">🤝 ∩ es lo que comparten. ∪ es todo lo que cubren.</p><div class="demo" id="d2b"></div>
+<p class="pt">📦 Acotar: aplica cada operación a los extremos.</p><div class="demo" id="d2c"></div>
+</details>
+<details><summary>3. Inecuaciones de primer grado</summary>
+<p class="pt">Receta: limpia fracciones, manda los números sueltos al otro lado, divide entre el de x (si es negativo, voltea) y escribe el intervalo.</p>
+<p class="pt">🍰 Con fracciones: multiplica por el MCM.</p><div class="demo" id="d3a"></div>
+<p class="pt">🥪 Doble desigualdad: trabaja en las tres partes.</p><div class="demo" id="d3b"></div>
+<p class="pt">🧩 Sistema: x debe cumplir las dos, usa la intersección.</p><div class="demo" id="d3c"></div>
+</details>
+<details><summary>4. Segundo grado</summary>
+<p class="pt">📍 Puntos críticos: factoriza, marca dónde vale 0 y elige las zonas.</p><div class="demo" id="d4a"></div>
+<p class="pt">🎲 Casos curiosos: cuadrados perfectos y trinomios sin raíces.</p><div class="demo" id="d4b"></div>
+</details>
+</section>
+
+<section id="t2">
+<div class="card">
+<p>Mueve los controles y mira cómo se arma el intervalo. Tú decides si los bordes entran.</p>
+<svg id="nl" viewBox="0 0 620 90" role="img" aria-label="Recta numérica con el intervalo"></svg>
+<div class="row"><label>Inicio <input type="range" id="ra" min="-10" max="10" value="-2"></label><label>Final <input type="range" id="rb" min="-10" max="10" value="5"></label></div>
+<div class="row"><label><input type="checkbox" id="ca" checked> incluir inicio</label><label><input type="checkbox" id="cb"> incluir final</label><label><input type="checkbox" id="ia"> inicio en −∞</label><label><input type="checkbox" id="ib"> final en +∞</label></div>
+<div class="out" id="nout"></div>
+<div class="row"><button class="btn" id="neg">Multiplicar por −1</button><span id="nhint" class="pill" hidden>¡Se volteó el intervalo!</span></div>
+</div>
+</section>
+
+<section id="t3">
+<div class="card">
+<p>Resuelve paso a paso. Elige el problema y usa los botones.</p>
+<div class="row" id="plist"></div>
+<div class="eq"><span id="seesaw">⚖️</span><span id="eqt"></span></div>
+<div class="row"><button class="btn alt" id="s1">Pasar el número suelto</button><button class="btn alt" id="s2">Dividir entre el número de x</button></div>
+<div class="msg" id="smsg"></div>
+<div class="out" id="sout" hidden></div>
+</div>
+</section>
+
+<section id="t4">
+<div class="card">
+<p>Cada solución tiene <b>un error</b>. Toca la línea donde está.</p>
+<h3 id="dtitle"></h3>
+<div id="dlines"></div>
+<div class="msg" id="dmsg"></div>
+<div class="row"><button class="btn" id="dnext" hidden>Siguiente caso</button><span class="pill" id="dscore">Aciertos: 0</span></div>
+</div>
+</section>
+</div>
+
+<script>
+// Pestañas
+document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){
+document.querySelectorAll('nav button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+document.querySelectorAll('section').forEach(function(s){s.classList.toggle('on',s.id===b.dataset.t)});}});
+var $=function(i){return document.getElementById(i)};
+var M='\u2212';
+function sg(n){return n<0?M+Math.abs(n):''+n}
+
+// RECTA
+function drawNL(){
+var a=+$('ra').value,b=+$('rb').value,ia=$('ia').checked,ib=$('ib').checked,ca=$('ca').checked,cb=$('cb').checked;
+if(!ia&&!ib&&a>b){var t=a;a=b;b=t;t=ca;ca=cb;cb=t}
+var X=function(v){return 310+v*27},s='<line x1="10" y1="50" x2="610" y2="50" stroke="#e58b9b" stroke-width="3"/>';
+for(var v=-10;v<=10;v+=2){s+='<line x1="'+X(v)+'" y1="45" x2="'+X(v)+'" y2="55" stroke="#9a92b3"/><text x="'+X(v)+'" y="78" font-size="12" text-anchor="middle" fill="currentColor">'+sg(v)+'</text>'}
+var x1=ia?14:X(a),x2=ib?606:X(b);
+s+='<line x1="'+x1+'" y1="50" x2="'+x2+'" y2="50" stroke="#7c5cd6" stroke-width="8" stroke-linecap="round"/>';
+if(!ia)s+='<circle cx="'+X(a)+'" cy="50" r="8" fill="'+(ca?'#7c5cd6':'#fff')+'" stroke="#7c5cd6" stroke-width="3"/>';
+if(!ib)s+='<circle cx="'+X(b)+'" cy="50" r="8" fill="'+(cb?'#7c5cd6':'#fff')+'" stroke="#7c5cd6" stroke-width="3"/>';
+$('nl').innerHTML=s;
+var L=ia?'\u27e8'+M+'\u221e':(ca?'['+sg(a):'\u27e8'+sg(a));
+var R=ib?'+\u221e\u27e9':(cb?sg(b)+']':sg(b)+'\u27e9');
+$('nout').textContent='x \u2208 '+L+' ; '+R;}
+['ra','rb','ca','cb','ia','ib'].forEach(function(i){$(i).oninput=drawNL;$(i).onchange=drawNL});
+$('neg').onclick=function(){
+var a=+$('ra').value,b=+$('rb').value,ca=$('ca').checked,cb=$('cb').checked,ia=$('ia').checked,ib=$('ib').checked;
+$('ra').value=-b;$('rb').value=-a;$('ca').checked=cb;$('cb').checked=ca;$('ia').checked=ib;$('ib').checked=ia;
+drawNL();var h=$('nhint');h.hidden=false;setTimeout(function(){h.hidden=true},2500)};
+drawNL();
+
+// BALANZA
+var P=[{a:-3,b:1,c:7,o:'>'},{a:-4,b:4,c:-16,o:'\u2264'},{a:2,b:-5,c:9,o:'<'},{a:-1,b:4,c:-6,o:'>'}],cur,st;
+function gcd(x,y){return y?gcd(y,x%y):Math.abs(x)}
+function frac(n,d){if(d<0){n=-n;d=-d}var g=gcd(n,d);n/=g;d/=g;return d==1?sg(n):sg(n)+'/'+d}
+function flip(o){return{'>':'<','<':'>','\u2265':'\u2264','\u2264':'\u2265'}[o]}
+function cx(a){return a==1?'x':a==-1?M+'x':sg(a)+'x'}
+function showEq(){
+var p=cur,t;
+if(st==0)t=cx(p.a)+(p.b<0?' '+M+' ':' + ')+Math.abs(p.b)+' '+p.o+' '+sg(p.c);
+else if(st==1)t=cx(p.a)+' '+p.o+' '+sg(p.c-p.b);
+else t='x '+p.f+' '+frac(p.c-p.b,p.a);
+$('eqt').textContent=t;
+$('seesaw').style.transform='rotate('+((p.o=='>'||p.o=='\u2265')?-10:10)+'deg)';
+$('s1').disabled=st!=0;$('s2').disabled=st!=1;}
+function pick(i){cur=Object.assign({},P[i]);st=0;$('sout').hidden=true;$('smsg').textContent='Primero libera la x: ¿qué número anda suelto con ella?';showEq();
+document.querySelectorAll('#plist button').forEach(function(b,j){b.className='btn'+(j==i?'':' alt')})}
+P.forEach(function(p,i){var b=document.createElement('button');b.textContent='Problema '+(i+1);b.onclick=function(){pick(i)};$('plist').appendChild(b)});
+$('s1').onclick=function(){st=1;$('smsg').textContent='Restamos '+sg(cur.b)+' en los dos lados. El signo no cambia. Ahora divide entre '+sg(cur.a)+'.';showEq()};
+$('s2').onclick=function(){
+cur.f=cur.a<0?flip(cur.o):cur.o;st=2;
+$('smsg').textContent=cur.a<0?'Dividiste entre un número negativo, así que '+cur.o+' se volteó a '+cur.f+'. ¡Esa es la clave!':'Dividiste entre un positivo, así que el signo se queda igual.';
+showEq();var k=frac(cur.c-cur.b,cur.a),f=cur.f,r;
+r=(f=='>')?'\u27e8'+k+' ; +\u221e\u27e9':(f=='\u2265')?'['+k+' ; +\u221e\u27e9':(f=='<')?'\u27e8'+M+'\u221e ; '+k+'\u27e9':'\u27e8'+M+'\u221e ; '+k+']';
+$('sout').hidden=false;$('sout').textContent='x \u2208 '+r};
+$('s2').addEventListener('mouseenter',function(){});
+pick(0);
+
+// DETECTIVE
+var D=[
+{t:'Resuelve: \u22122x > 6',l:['\u22122x > 6','x > 6 \u00f7 (\u22122)','x > \u22123'],e:1,w:'Dividiste entre un negativo y no volteaste el signo. Debía quedar x < \u22123.'},
+{t:'Resuelve: 7 < x + 4 \u2264 10',l:['Resto 4 en todas las partes: 3 < x \u2264 6','x \u2208 [3 ; 6]'],e:1,w:'El 3 tiene “<”, así que el borde no entra. Correcto: ⟨3 ; 6].'},
+{t:'Resuelve: x\u00b2 \u2212 4x < 0',l:['x(x \u2212 4) < 0','Puntos críticos: 0 y 4','Lo negativo queda afuera: ⟨\u2212\u221e;0⟩ ∪ ⟨4;+\u221e⟩'],e:2,w:'Con signos + − + lo negativo es la zona del medio: ⟨0 ; 4⟩.'},
+{t:'Si x \u2265 4, ¿qué pasa con M = 1 \u2212 x?',l:['x \u2265 4','\u2212x \u2265 \u22124','1 \u2212 x \u2265 \u22123'],e:1,w:'Al multiplicar por −1 el signo se voltea: −x ≤ −4, y entonces M ≤ −3.'}
+],di=0,sc=0,done=false;
+function loadD(){done=false;var c=D[di];$('dtitle').textContent=c.t;$('dmsg').textContent='';$('dnext').hidden=true;$('dlines').innerHTML='';
+c.l.forEach(function(x,i){var b=document.createElement('button');b.className='line';b.textContent=x;b.onclick=function(){
+if(done)return;
+if(i==c.e){done=true;sc++;b.classList.add('right');$('dmsg').textContent='¡Lo encontraste! '+c.w;$('dscore').textContent='Aciertos: '+sc;$('dnext').hidden=false;$('dnext').textContent=di<D.length-1?'Siguiente caso':'Volver a empezar'}
+else{b.classList.add('wrong');$('dmsg').textContent='Esa línea está bien. Sigue buscando.'}};$('dlines').appendChild(b)})}
+$('dnext').onclick=function(){if(di<D.length-1)di++;else{di=0;sc=0;$('dscore').textContent='Aciertos: 0'}loadD()};
+loadD();
+</script>
+<script>
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function demo(id,build){var b=$(id),ex=el('div','ex'),nt=el('div','note'),bar=el('div','row');b.append(ex,nt,bar);
+build({ex:ex,note:nt,btn:function(l,f){var x=el('button','btn alt sm',l);x.onclick=f;bar.appendChild(x);return x}})}
+function circ(x,y,f,c){return '<circle cx="'+x+'" cy="'+y+'" r="8" fill="'+(f?c:'#fff')+'" stroke="'+c+'" stroke-width="3"/>'}
+function nl(min,max,rows){var X=function(v){return 30+(v-min)*540/(max-min)},H=rows.length*46+30,s='<svg viewBox="0 0 600 '+H+'" role="img" aria-label="recta numérica">';
+rows.forEach(function(r,i){var y=34+i*46,c=r.col||'#7c5cd6',x1=r.a==null?12:X(r.a),x2=r.b==null?588:X(r.b);
+s+='<text x="12" y="'+(y-14)+'" font-size="14" font-weight="800" fill="currentColor">'+r.l+'</text><line x1="10" y1="'+y+'" x2="590" y2="'+y+'" stroke="#c9c1dc" stroke-width="2"/><line x1="'+x1+'" y1="'+y+'" x2="'+x2+'" y2="'+y+'" stroke="'+c+'" stroke-width="8" stroke-linecap="round"/>';
+if(r.a!=null)s+=circ(X(r.a),y,r.ia,c);if(r.b!=null)s+=circ(X(r.b),y,r.ib,c)});
+for(var v=min;v<=max;v+=(max-min>14?2:1))s+='<text x="'+X(v)+'" y="'+(H-4)+'" font-size="12" text-anchor="middle" fill="currentColor">'+sg(v)+'</text>';
+return s+'</svg>'}
+function rd(v){return Math.round(v*100)/100}
+function fr(n,d){return '<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>'}
+
+demo('d1a',function(d){var k=0;function r(){d.ex.textContent=(k==0?'x':k>0?'x + '+k:'x '+M+' '+(-k))+' < '+sg(3+k);d.note.textContent=k==0?'Empezamos con x < 3. Prueba los botones.':'Le hicimos lo mismo a los dos lados y el signo < sigue igual.'}
+d.btn('+1 a cada lado',function(){k++;r()});d.btn(M+'1 a cada lado',function(){k--;r()});d.btn('Reiniciar',function(){k=0;r()});r()});
+
+demo('d1b',function(d){var s=1;function r(){d.ex.textContent=(s==1?'x':s>1?s+'x':'x/'+(1/s))+' < '+rd(3*s);d.note.textContent=s==1?'Empezamos con x < 3.':'Multiplicar o dividir por un positivo no cambia el signo.'}
+d.btn('× 2',function(){if(s<8)s*=2;r()});d.btn('÷ 2',function(){if(s>0.25)s/=2;r()});d.btn('Reiniciar',function(){s=1;r()});r()});
+
+demo('d1c',function(d){var f=false;function r(){d.ex.textContent=f?M+'x > '+M+'3':'x < 3';d.note.textContent=f?'¡El signo se volteó! Prueba con números: 2 < 3, pero '+M+'2 > '+M+'3.':'Empezamos con x < 3.'}
+d.btn('× ('+M+'1)',function(){f=!f;r()});r()});
+
+demo('d2a',function(d){var inc=false;function r(){d.ex.innerHTML='<div>'+(inc?'x ≥ 2  →  [2 ; +∞⟩':'x > 2  →  ⟨2 ; +∞⟩')+'</div>'+nl(-2,8,[{l:'x',a:2,b:null,ia:inc}]);d.note.textContent=inc?'Corchete y círculo lleno: el 2 sí entra.':'Paréntesis y círculo vacío: el 2 no entra. El infinito siempre va con ⟩.'}
+d.btn('Cambiar borde',function(){inc=!inc;r()});r()});
+
+demo('d2b',function(d){var u=false;function r(){var res=u?{l:'A ∪ B',a:2,b:10,col:'#2f9e72'}:{l:'A ∩ B',a:4,b:8,col:'#2f9e72'};
+d.ex.innerHTML=nl(0,12,[{l:'A = ⟨2;8⟩',a:2,b:8},{l:'B = ⟨4;10⟩',a:4,b:10,col:'#e58b6b'},res]);d.note.textContent=u?'Unión: todo lo que cubre A o B → ⟨2 ; 10⟩':'Intersección: la parte donde coinciden → ⟨4 ; 8⟩'}
+d.btn('Ver ∩',function(){u=false;r()});d.btn('Ver ∪',function(){u=true;r()});r()});
+
+demo('d2c',function(d){var m=1,k=0,t='Empezamos con x en [2 ; 10].';
+function ef(){var xs=m==1?'x':m==-1?M+'x':(Math.abs(m)<1&&Number.isInteger(1/m))?(m<0?M:'')+'x/'+Math.abs(1/m):sg(m)+'x';return xs+(k>0?' + '+rd(k):k<0?' '+M+' '+rd(-k):'')}
+function r(){var p=m*2+k,q=m*10+k;d.ex.textContent=ef()+' ∈ ['+sg(rd(Math.min(p,q)))+' ; '+sg(rd(Math.max(p,q)))+']';d.note.textContent=t}
+d.btn('÷ 2',function(){m/=2;k/=2;t='Dividir entre 2 achica el intervalo.';r()});
+d.btn('× ('+M+'1)',function(){m=-m;k=-k;t='Por −1 los extremos se voltean y cambian de lugar.';r()});
+d.btn('+ 4',function(){k+=4;t='Sumar mueve todo el intervalo hacia la derecha.';r()});
+d.btn('Reiniciar',function(){m=1;k=0;t='Empezamos con x en [2 ; 10].';r()});r()});
+
+function stepper(id,S){demo(id,function(d){var i=0;function r(){d.ex.innerHTML=S.slice(0,i+1).map(function(s,j){return j==i?'<b>'+s[0]+'</b>':'<span style="opacity:.55">'+s[0]+'</span>'}).join('<br>');d.note.textContent=S[i][1];nx.disabled=i==S.length-1}
+var nx=d.btn('Siguiente paso',function(){i++;r()});d.btn('Reiniciar',function(){i=0;r()});r()})}
+stepper('d3a',[[fr('x',2)+' + '+fr(1,3)+' < '+fr(5,6),'Hay fracciones. El MCM de 2, 3 y 6 es 6.'],['6·('+fr('x',2)+' + '+fr(1,3)+') < 6·('+fr(5,6)+')','Multiplicamos todo por 6 (positivo): el signo no cambia.'],['3x + 2 < 5','¡Adiós fracciones!'],['3x < 3','Pasamos el 2 restando.'],['x < 1  →  ⟨'+M+'∞ ; 1⟩','Dividimos entre 3 (positivo). Listo.']]);
+stepper('d3b',[['7 < x + 4 ≤ 10','x queda en sándwich.'],['7 '+M+' 4 < x ≤ 10 '+M+' 4','Restamos 4 en las tres partes a la vez.'],['3 < x ≤ 6  →  ⟨3 ; 6]','El < deja el 3 afuera y el ≤ deja el 6 adentro.']]);
+stepper('d3c',[['4 '+M+' 4x ≤ '+M+'16   y   '+M+'x + 4 > '+M+'6','Son dos inecuaciones y x debe cumplir las dos.'],['x ≥ 5   y   x < 10','Resolvimos cada una. Dividir entre negativo volteó los signos.'],['[5 ; 10⟩','Nos quedamos con lo que comparten: la intersección.']]);
+
+demo('d4a',function(d){var op='<',R={'<':'⟨0 ; 4⟩','≤':'[0 ; 4]','>':'⟨'+M+'∞ ; 0⟩ ∪ ⟨4 ; +∞⟩','≥':'⟨'+M+'∞ ; 0] ∪ [4 ; +∞⟩'};
+function r(){var inc=op=='≤'||op=='≥',mid=op=='<'||op=='≤',X=function(v){return 30+(v+2)*67.5},s='<svg viewBox="0 0 600 100" role="img" aria-label="signos en la recta"><line x1="10" y1="50" x2="590" y2="50" stroke="#c9c1dc" stroke-width="2"/>';
+[[-2,0,'+'],[0,4,M],[4,6,'+']].forEach(function(z,i){s+='<text x="'+((X(z[0])+X(z[1]))/2)+'" y="28" font-size="22" font-weight="800" text-anchor="middle" fill="'+(i==1?'#5b8fd6':'#e58b6b')+'">'+z[2]+'</text>';
+if((mid&&i==1)||(!mid&&i!=1))s+='<line x1="'+(i==0?12:X(z[0]))+'" y1="50" x2="'+(i==2?588:X(z[1]))+'" y2="50" stroke="#7c5cd6" stroke-width="8" stroke-linecap="round"/>'});
+s+=circ(X(0),50,inc,'#7c5cd6')+circ(X(4),50,inc,'#7c5cd6')+'<text x="'+X(0)+'" y="86" text-anchor="middle" fill="currentColor">0</text><text x="'+X(4)+'" y="86" text-anchor="middle" fill="currentColor">4</text></svg>';
+d.ex.innerHTML='<div>x² '+M+' 4x '+op+' 0</div>'+s;d.note.textContent='x(x '+M+' 4): puntos críticos 0 y 4. Respuesta: '+R[op]}
+['<','≤','>','≥'].forEach(function(o){d.btn(o+' 0',function(){op=o;r()})});r()});
+
+demo('d4b',function(d){var e=0,s='>',E=[{t:'(x '+M+' 4)²',R:{'>':'ℝ '+M+' {4}','≥':'ℝ','<':'∅','≤':'{4}'},n:'Un cuadrado nunca es negativo y vale 0 solo cuando x = 4.'},{t:'x² + 1',R:{'>':'ℝ','≥':'ℝ','<':'∅','≤':'∅'},n:'x² + 1 siempre vale 1 o más: nunca llega a 0.'}];
+function r(){d.ex.textContent=E[e].t+' '+s+' 0  →  x ∈ '+E[e].R[s];d.note.textContent=E[e].n}
+d.btn(E[0].t,function(){e=0;r()});d.btn(E[1].t,function(){e=1;r()});['<','≤','>','≥'].forEach(function(o){d.btn(o+' 0',function(){s=o;r()})});r()});
+</script>
+</body>
+</html>
